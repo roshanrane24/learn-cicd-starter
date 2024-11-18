@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"testing"
 	"net/http"
+	"testing"
 	//"errors"
 )
 
@@ -18,10 +18,10 @@ func TestGetAPIKey(t *testing.T) {
 	// h3 := http.Header{}
 	// h3.Add("Authorization", "ApiKey")
 
-	tests := []struct{
-		input 		http.Header
-		expKey	string
-		expErr 		error
+	tests := []struct {
+		input  http.Header
+		expKey string
+		expErr error
 	}{
 		{h, "", ErrNoAuthHeaderIncluded},
 		{h1, "", ErrNoAuthHeaderIncluded},
@@ -32,9 +32,8 @@ func TestGetAPIKey(t *testing.T) {
 	for _, test := range tests {
 		key, err := GetAPIKey(test.input)
 		if key != test.expKey || err != test.expErr {
-			t.Fatalf("Inputs -- %v\nExpected:\nKey=%v\nError=%v\n\nGot:\nKey=%v\nErr=%v\n", test.input,  test.expKey, test.expErr, key, err)
+			t.Fatalf("Inputs -- %v\nExpected:\nKey=%v\nError=%v\n\nGot:\nKey=%v\nErr=%v\n", test.input, test.expKey, test.expErr, key, err)
 		}
 	}
-
 
 }
