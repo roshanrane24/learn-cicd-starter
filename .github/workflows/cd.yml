@@ -7,6 +7,9 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: ${{  secrets.DATABASE_URL  }}
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -18,3 +21,9 @@ jobs:
 
       - name: Buid App
         run: (scripts/buildprod.sh)
+
+      - name: Install Goose
+        run: go install github.com/pressly/goose/v3/cmd/goose@latest
+
+      - name: Migarate Database
+        run: (scripts/migrateup.sh)
